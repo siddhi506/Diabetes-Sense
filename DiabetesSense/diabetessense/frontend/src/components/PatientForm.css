@@ -1,0 +1,109 @@
+.patient-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px 28px;
+}
+
+@media (max-width: 640px) {
+  .patient-form__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field__label-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.field__label-row label {
+  font-weight: 600;
+  font-size: 0.94rem;
+  color: var(--ink);
+}
+
+.field__unit {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+}
+
+.field__hint {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+  margin-top: 2px;
+  margin-bottom: 0;
+}
+
+.field__controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.field__controls input[type='range'] {
+  flex: 1;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--line-strong);
+  outline: none;
+}
+
+.field__controls input[type='range']::-webkit-slider-thumb {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--brand);
+  border: 2px solid var(--paper-raised);
+  box-shadow: 0 0 0 1px var(--brand);
+  cursor: pointer;
+}
+
+.field__controls input[type='range']::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--brand);
+  border: 2px solid var(--paper-raised);
+  box-shadow: 0 0 0 1px var(--brand);
+  cursor: pointer;
+}
+
+.field__number {
+  width: 68px;
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-align: right;
+  padding: 6px 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  background: var(--paper-raised);
+  color: var(--ink);
+}
+
+.patient-form__submit {
+  margin-top: 30px;
+  width: 100%;
+  padding: 14px 20px;
+  background: var(--brand-deep);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.98rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.patient-form__submit:hover:not(:disabled) {
+  background: var(--brand);
+}
+
+.patient-form__submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

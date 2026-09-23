@@ -1,0 +1,44 @@
+.factor-chart__legend {
+  display: flex;
+  gap: 18px;
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.factor-chart__legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.factor-chart__legend i {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.factor-tooltip {
+  background: var(--ink);
+  color: #fff;
+  padding: 10px 12px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  max-width: 200px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+.factor-tooltip__title {
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+
+.factor-tooltip__value {
+  opacity: 0.85;
+  margin-bottom: 2px;
+}
+
+.factor-tooltip__impact {
+  opacity: 0.85;
+}

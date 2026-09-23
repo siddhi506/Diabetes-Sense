@@ -1,0 +1,43 @@
+{
+  "primary_model": "Random Forest",
+  "random_forest": {
+    "accuracy": 0.7338,
+    "precision": 0.6,
+    "recall": 0.7222,
+    "f1_score": 0.6555,
+    "roc_auc": 0.8204,
+    "confusion_matrix": [
+      [
+        74,
+        26
+      ],
+      [
+        15,
+        39
+      ]
+    ]
+  },
+  "logistic_regression_baseline": {
+    "accuracy": 0.7338,
+    "precision": 0.6032,
+    "recall": 0.7037,
+    "f1_score": 0.6496,
+    "roc_auc": 0.8126,
+    "confusion_matrix": [
+      [
+        75,
+        25
+      ],
+      [
+        16,
+        38
+      ]
+    ]
+  },
+  "dataset": {
+    "name": "UCI Pima Indians Diabetes Database",
+    "n_records": 768,
+    "n_features": 8,
+    "positive_rate": 0.349
+  }
+}
