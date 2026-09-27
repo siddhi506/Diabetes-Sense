@@ -6,3 +6,5 @@ numpy==2.4.4
 shap==0.52.0
 joblib==1.5.3
 pydantic==2.13.5
+xgboost>=2.0.0
+imbalanced-learn>=0.12.0

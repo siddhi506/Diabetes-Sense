@@ -1,8 +1,9 @@
 import RiskGauge from './RiskGauge'
 import FactorChart from './FactorChart'
+import { generatePatientReport } from '../lib/reportGenerator'
 import './ResultPanel.css'
 
-export default function ResultPanel({ result, loading, error }) {
+export default function ResultPanel({ result, loading, error, patientValues }) {
   if (error) {
     return (
       <div className="result-panel result-panel--empty">
@@ -20,7 +21,7 @@ export default function ResultPanel({ result, loading, error }) {
     return (
       <div className="result-panel result-panel--empty">
         <div className="result-panel__spinner" />
-        <p>Running the Random Forest model and computing SHAP contributions…</p>
+        <p>Running the prediction model and computing SHAP contributions…</p>
       </div>
     )
   }
@@ -48,8 +49,24 @@ export default function ResultPanel({ result, loading, error }) {
           <p className="result-panel__band">
             {bandClass === 'high' ? 'High predicted risk' : bandClass === 'moderate' ? 'Moderate predicted risk' : 'Low predicted risk'}
           </p>
-          <p className="result-panel__confidence">Model confidence: {result.confidence}</p>
+          <p className="result-panel__confidence">
+            Model: <strong>{result.model_used || 'Calibrated Random Forest'}</strong> | Confidence: {result.confidence}
+          </p>
         </div>
+      </div>
+
+      <div className="result-panel__actions">
+        <button
+          className="result-panel__pdf-btn"
+          onClick={() => generatePatientReport(result, patientValues)}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+          Download Patient Screening PDF
+        </button>
       </div>
 
       <div className="result-panel__section">

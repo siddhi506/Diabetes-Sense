@@ -1,8 +1,9 @@
 """
 DiabetesSense API
 ==================
-FastAPI service that serves the trained Random Forest model and returns
-SHAP-based explanations alongside each prediction.
+FastAPI service that serves the trained ML model suite, return
+SHAP-based explanations alongside each prediction, and provides
+EDA dataset insights & global feature importance.
 
 Run:  uvicorn api:app --reload --port 8000
 Docs: http://localhost:8000/docs
@@ -13,7 +14,7 @@ from pathlib import Path
 
 import joblib
 import numpy as np
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
@@ -23,12 +24,12 @@ ARTIFACTS = HERE / "artifacts"
 app = FastAPI(
     title="DiabetesSense API",
     description="Explainable ML API for diabetes risk prediction (educational/research use only — not a medical device).",
-    version="1.0.0",
+    version="2.1.0",
 )
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # tighten this to your deployed frontend origin in production
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -37,16 +38,41 @@ app.add_middleware(
 # ---------------------------------------------------------------------------
 # Load artifacts once at startup
 # ---------------------------------------------------------------------------
+models = {}
+primary_model = None
+
 try:
-    model = joblib.load(ARTIFACTS / "model_random_forest.joblib")
     scaler = joblib.load(ARTIFACTS / "scaler.joblib")
     explainer = joblib.load(ARTIFACTS / "shap_explainer.joblib")
+    
+    # Load model suite
+    model_files = {
+        "calibrated_random_forest": "model_calibrated_random_forest.joblib",
+        "calibrated_xgboost": "model_calibrated_xgboost.joblib",
+        "random_forest": "model_random_forest.joblib",
+        "xgboost": "model_xgboost.joblib",
+        "logistic_regression": "model_logistic_regression.joblib",
+        "decision_tree": "model_decision_tree.joblib",
+        "svm": "model_svm.joblib",
+        "knn": "model_knn.joblib",
+    }
+    
+    for key, filename in model_files.items():
+        path = ARTIFACTS / filename
+        if path.exists():
+            models[key] = joblib.load(path)
+            
+    primary_model = models.get("calibrated_random_forest") or models.get("random_forest")
+
     with open(ARTIFACTS / "feature_names.json") as f:
         feat_meta = json.load(f)
     with open(ARTIFACTS / "medians.json") as f:
         medians = json.load(f)
     with open(ARTIFACTS / "metrics.json") as f:
         metrics = json.load(f)
+    with open(ARTIFACTS / "eda_summary.json") as f:
+        eda_summary = json.load(f)
+
 except FileNotFoundError as e:
     raise RuntimeError(
         "Model artifacts not found. Run `python train.py` before starting the API."
@@ -94,6 +120,7 @@ class FeatureContribution(BaseModel):
 
 
 class PredictionResponse(BaseModel):
+    model_used: str
     risk_label: str
     risk_probability: float
     confidence: str
@@ -109,7 +136,7 @@ DISCLAIMER = (
 )
 
 
-def _row_from_input(p: PatientInput) -> np.ndarray:
+def _row_from_input(p: PatientInput) -> tuple[np.ndarray, dict]:
     raw = {
         "Pregnancies": p.pregnancies,
         "Glucose": p.glucose,
@@ -120,7 +147,6 @@ def _row_from_input(p: PatientInput) -> np.ndarray:
         "DiabetesPedigreeFunction": p.diabetes_pedigree_function,
         "Age": p.age,
     }
-    # apply the same "0 means missing -> median impute" rule used in training
     for col in ZERO_AS_MISSING:
         if raw[col] == 0:
             raw[col] = medians[col]
@@ -137,22 +163,38 @@ def model_info():
     return metrics
 
 
+@app.get("/eda-info")
+def eda_info():
+    return eda_summary
+
+
 @app.post("/predict", response_model=PredictionResponse)
-def predict(patient: PatientInput):
+def predict(
+    patient: PatientInput,
+    model_name: str = Query("calibrated_random_forest", description="Model key to use for prediction")
+):
     try:
         raw_row, raw_dict = _row_from_input(patient)
         scaled_row = scaler.transform(raw_row)
 
-        proba = model.predict_proba(scaled_row)[0][1]
+        target_model = models.get(model_name, primary_model)
+
+        if hasattr(target_model, "predict_proba"):
+            proba = float(target_model.predict_proba(scaled_row)[0][1])
+        elif hasattr(target_model, "decision_function"):
+            score = float(target_model.decision_function(scaled_row)[0])
+            proba = 1 / (1 + np.exp(-score))
+        else:
+            proba = float(target_model.predict(scaled_row)[0])
+
         label = "HIGH" if proba >= 0.5 else "LOW"
         confidence = "high" if abs(proba - 0.5) > 0.25 else "moderate"
 
-        # SHAP values for the positive class ("diabetes risk")
         shap_raw = explainer.shap_values(scaled_row)
         shap_arr = np.array(shap_raw)
-        if shap_arr.ndim == 3:  # (n_samples, n_features, n_classes)
+        if shap_arr.ndim == 3:
             shap_vals = shap_arr[0, :, 1]
-        else:  # (n_samples, n_features)
+        else:
             shap_vals = shap_arr[0]
 
         contributions = []
@@ -169,10 +211,12 @@ def predict(patient: PatientInput):
             )
 
         contributions_sorted = sorted(contributions, key=lambda c: abs(c.shap_value), reverse=True)
+        display_model_name = metrics.get("models", {}).get(model_name, {}).get("name", model_name)
 
         return PredictionResponse(
+            model_used=display_model_name,
             risk_label=label,
-            risk_probability=round(float(proba), 4),
+            risk_probability=round(proba, 4),
             confidence=confidence,
             top_factors=contributions_sorted[:4],
             all_factors=contributions_sorted,
@@ -184,5 +228,4 @@ def predict(patient: PatientInput):
 
 if __name__ == "__main__":
     import uvicorn
-
     uvicorn.run(app, host="0.0.0.0", port=8000)

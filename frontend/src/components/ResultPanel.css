@@ -96,7 +96,36 @@
 .result-panel__confidence {
   font-size: 0.85rem;
   color: var(--ink-soft);
-  text-transform: capitalize;
+}
+
+.result-panel__actions {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.result-panel__pdf-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(37, 99, 235, 0.2);
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.result-panel__pdf-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.result-panel__pdf-btn:active {
+  transform: translateY(0);
 }
 
 .result-panel__section h3 {
