@@ -1,0 +1,343 @@
+.patient-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Clinical Presets */
+.patient-form__presets {
+  background: var(--paper, #f8fafc);
+  border: 1px solid var(--line, #e2e8f0);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.presets-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink-soft, #64748b);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.live-eval-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.live-eval-toggle--on {
+  background: #dcfce7;
+  color: #166534;
+  border-color: #86efac;
+}
+
+.live-eval-toggle--off {
+  background: #f1f5f9;
+  color: #64748b;
+  border-color: #cbd5e1;
+}
+
+.live-eval-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.presets-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.preset-pill {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #ffffff;
+}
+
+.preset-pill--normal {
+  border-color: #86efac;
+  color: #166534;
+  background: #f0fdf4;
+}
+
+.preset-pill--normal:hover {
+  background: #dcfce7;
+}
+
+.preset-pill--warning {
+  border-color: #fde047;
+  color: #854d0e;
+  background: #fefce8;
+}
+
+.preset-pill--warning:hover {
+  background: #fef9c3;
+}
+
+.preset-pill--critical {
+  border-color: #fca5a5;
+  color: #991b1b;
+  background: #fef2f2;
+}
+
+.preset-pill--critical:hover {
+  background: #fee2e2;
+}
+
+.preset-pill--action {
+  border-color: var(--line, #cbd5e1);
+  color: var(--ink, #334155);
+  background: #ffffff;
+}
+
+.preset-pill--action:hover {
+  background: var(--paper, #f1f5f9);
+}
+
+/* Model Selector */
+.patient-form__model-select {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  background: #ffffff;
+  border: 1px solid var(--line, #e2e8f0);
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+}
+
+.patient-form__model-select label {
+  font-size: 0.825rem;
+  font-weight: 600;
+  color: var(--ink, #1e293b);
+}
+
+.model-select-input {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.825rem;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid var(--line, #cbd5e1);
+  background: var(--paper, #f8fafc);
+  color: var(--brand-deep, #1f4f4c);
+  cursor: pointer;
+}
+
+/* Inputs Grid */
+.patient-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 640px) {
+  .patient-form__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field-card {
+  background: #ffffff;
+  border: 1px solid var(--line, #e2e8f0);
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field-card:focus-within {
+  border-color: var(--brand, #2e6f6b);
+  box-shadow: 0 0 0 2px var(--brand-tint, #e4efec);
+}
+
+.field-card__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.field-card__title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.field-card__title label {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--ink, #0f172a);
+  cursor: pointer;
+}
+
+.field-card__unit {
+  font-size: 0.75rem;
+  color: var(--ink-soft, #64748b);
+  font-family: var(--font-mono, monospace);
+}
+
+.status-badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.status-badge--normal {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status-badge--warning {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.status-badge--critical {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status-badge--neutral {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.field-card__hint {
+  font-size: 0.75rem;
+  color: var(--ink-soft, #64748b);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.field-card__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.field-card__slider {
+  flex: 1;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--line, #cbd5e1);
+  outline: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.field-card__slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--brand, #2e6f6b);
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.field-card__slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+.field-card__number {
+  width: 72px;
+  flex-shrink: 0;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: right;
+  padding: 6px 8px;
+  border: 1px solid var(--line, #cbd5e1);
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--ink, #0f172a);
+}
+
+.field-card__number:focus {
+  outline: none;
+  border-color: var(--brand, #2e6f6b);
+}
+
+/* Submit Button */
+.patient-form__submit {
+  width: 100%;
+  padding: 13px 20px;
+  background: linear-gradient(135deg, var(--brand, #2e6f6b), var(--brand-deep, #1f4f4c));
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(46, 111, 107, 0.3);
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.patient-form__submit:hover:not(:disabled) {
+  opacity: 0.94;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(46, 111, 107, 0.35);
+}
+
+.patient-form__submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.submit-spinner-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

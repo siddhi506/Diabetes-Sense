@@ -1,0 +1,445 @@
+{
+  "primary_model": "Calibrated Random Forest",
+  "models": {
+    "logistic_regression": {
+      "name": "Logistic Regression (Baseline)",
+      "metrics": {
+        "accuracy": 0.7143,
+        "precision": 0.5806,
+        "recall": 0.6667,
+        "f1_score": 0.6207,
+        "roc_auc": 0.8111,
+        "confusion_matrix": [
+          [
+            74,
+            26
+          ],
+          [
+            18,
+            36
+          ]
+        ]
+      },
+      "cv_f1_score": 0.7301,
+      "best_params": {
+        "C": 10.0,
+        "solver": "lbfgs"
+      }
+    },
+    "decision_tree": {
+      "name": "Decision Tree",
+      "metrics": {
+        "accuracy": 0.6818,
+        "precision": 0.5287,
+        "recall": 0.8519,
+        "f1_score": 0.6525,
+        "roc_auc": 0.7721,
+        "confusion_matrix": [
+          [
+            59,
+            41
+          ],
+          [
+            8,
+            46
+          ]
+        ]
+      },
+      "cv_f1_score": 0.7719,
+      "best_params": {
+        "criterion": "gini",
+        "max_depth": 3,
+        "min_samples_split": 10
+      }
+    },
+    "random_forest": {
+      "name": "Random Forest",
+      "metrics": {
+        "accuracy": 0.7273,
+        "precision": 0.5938,
+        "recall": 0.7037,
+        "f1_score": 0.6441,
+        "roc_auc": 0.8095,
+        "confusion_matrix": [
+          [
+            74,
+            26
+          ],
+          [
+            16,
+            38
+          ]
+        ]
+      },
+      "cv_f1_score": 0.8247,
+      "best_params": {
+        "max_depth": null,
+        "min_samples_leaf": 2,
+        "n_estimators": 100
+      }
+    },
+    "svm": {
+      "name": "Support Vector Machine (SVM)",
+      "metrics": {
+        "accuracy": 0.7078,
+        "precision": 0.5738,
+        "recall": 0.6481,
+        "f1_score": 0.6087,
+        "roc_auc": 0.7993,
+        "confusion_matrix": [
+          [
+            74,
+            26
+          ],
+          [
+            19,
+            35
+          ]
+        ]
+      },
+      "cv_f1_score": 0.8214,
+      "best_params": {
+        "C": 10.0,
+        "gamma": "scale",
+        "kernel": "rbf"
+      }
+    },
+    "xgboost": {
+      "name": "XGBoost",
+      "metrics": {
+        "accuracy": 0.7532,
+        "precision": 0.6379,
+        "recall": 0.6852,
+        "f1_score": 0.6607,
+        "roc_auc": 0.822,
+        "confusion_matrix": [
+          [
+            79,
+            21
+          ],
+          [
+            17,
+            37
+          ]
+        ]
+      },
+      "cv_f1_score": 0.8186,
+      "best_params": {
+        "learning_rate": 0.1,
+        "max_depth": 7,
+        "n_estimators": 200
+      }
+    },
+    "knn": {
+      "name": "K-Nearest Neighbors (KNN)",
+      "metrics": {
+        "accuracy": 0.7078,
+        "precision": 0.5652,
+        "recall": 0.7222,
+        "f1_score": 0.6341,
+        "roc_auc": 0.7591,
+        "confusion_matrix": [
+          [
+            70,
+            30
+          ],
+          [
+            15,
+            39
+          ]
+        ]
+      },
+      "cv_f1_score": 0.8242,
+      "best_params": {
+        "metric": "euclidean",
+        "n_neighbors": 3,
+        "weights": "distance"
+      }
+    },
+    "calibrated_random_forest": {
+      "name": "Calibrated Random Forest (Primary)",
+      "metrics": {
+        "accuracy": 0.7403,
+        "precision": 0.6129,
+        "recall": 0.7037,
+        "f1_score": 0.6552,
+        "roc_auc": 0.8172,
+        "confusion_matrix": [
+          [
+            76,
+            24
+          ],
+          [
+            16,
+            38
+          ]
+        ]
+      },
+      "cv_f1_score": 0.8247,
+      "best_params": {
+        "max_depth": null,
+        "min_samples_leaf": 2,
+        "n_estimators": 100
+      }
+    },
+    "calibrated_xgboost": {
+      "name": "Calibrated XGBoost",
+      "metrics": {
+        "accuracy": 0.7468,
+        "precision": 0.6316,
+        "recall": 0.6667,
+        "f1_score": 0.6486,
+        "roc_auc": 0.8163,
+        "confusion_matrix": [
+          [
+            79,
+            21
+          ],
+          [
+            18,
+            36
+          ]
+        ]
+      },
+      "cv_f1_score": 0.8186,
+      "best_params": {
+        "learning_rate": 0.1,
+        "max_depth": 7,
+        "n_estimators": 200
+      }
+    }
+  },
+  "resampling_comparison": {
+    "logistic_regression": {
+      "name": "Logistic Regression (Baseline)",
+      "pre_smote": {
+        "accuracy": 0.7078,
+        "precision": 0.6,
+        "recall": 0.5,
+        "f1_score": 0.5455,
+        "roc_auc": 0.813,
+        "confusion_matrix": [
+          [
+            82,
+            18
+          ],
+          [
+            27,
+            27
+          ]
+        ]
+      },
+      "post_smote": {
+        "accuracy": 0.7143,
+        "precision": 0.5806,
+        "recall": 0.6667,
+        "f1_score": 0.6207,
+        "roc_auc": 0.8111,
+        "confusion_matrix": [
+          [
+            74,
+            26
+          ],
+          [
+            18,
+            36
+          ]
+        ]
+      }
+    },
+    "decision_tree": {
+      "name": "Decision Tree",
+      "pre_smote": {
+        "accuracy": 0.6818,
+        "precision": 0.5532,
+        "recall": 0.4815,
+        "f1_score": 0.5149,
+        "roc_auc": 0.6357,
+        "confusion_matrix": [
+          [
+            79,
+            21
+          ],
+          [
+            28,
+            26
+          ]
+        ]
+      },
+      "post_smote": {
+        "accuracy": 0.6818,
+        "precision": 0.5287,
+        "recall": 0.8519,
+        "f1_score": 0.6525,
+        "roc_auc": 0.7721,
+        "confusion_matrix": [
+          [
+            59,
+            41
+          ],
+          [
+            8,
+            46
+          ]
+        ]
+      }
+    },
+    "random_forest": {
+      "name": "Random Forest",
+      "pre_smote": {
+        "accuracy": 0.7792,
+        "precision": 0.7174,
+        "recall": 0.6111,
+        "f1_score": 0.66,
+        "roc_auc": 0.8179,
+        "confusion_matrix": [
+          [
+            87,
+            13
+          ],
+          [
+            21,
+            33
+          ]
+        ]
+      },
+      "post_smote": {
+        "accuracy": 0.7273,
+        "precision": 0.5938,
+        "recall": 0.7037,
+        "f1_score": 0.6441,
+        "roc_auc": 0.8095,
+        "confusion_matrix": [
+          [
+            74,
+            26
+          ],
+          [
+            16,
+            38
+          ]
+        ]
+      }
+    },
+    "svm": {
+      "name": "Support Vector Machine (SVM)",
+      "pre_smote": {
+        "accuracy": 0.7403,
+        "precision": 0.6522,
+        "recall": 0.5556,
+        "f1_score": 0.6,
+        "roc_auc": 0.7964,
+        "confusion_matrix": [
+          [
+            84,
+            16
+          ],
+          [
+            24,
+            30
+          ]
+        ]
+      },
+      "post_smote": {
+        "accuracy": 0.7078,
+        "precision": 0.5738,
+        "recall": 0.6481,
+        "f1_score": 0.6087,
+        "roc_auc": 0.7993,
+        "confusion_matrix": [
+          [
+            74,
+            26
+          ],
+          [
+            19,
+            35
+          ]
+        ]
+      }
+    },
+    "xgboost": {
+      "name": "XGBoost",
+      "pre_smote": {
+        "accuracy": 0.7727,
+        "precision": 0.7021,
+        "recall": 0.6111,
+        "f1_score": 0.6535,
+        "roc_auc": 0.8154,
+        "confusion_matrix": [
+          [
+            86,
+            14
+          ],
+          [
+            21,
+            33
+          ]
+        ]
+      },
+      "post_smote": {
+        "accuracy": 0.7532,
+        "precision": 0.6379,
+        "recall": 0.6852,
+        "f1_score": 0.6607,
+        "roc_auc": 0.822,
+        "confusion_matrix": [
+          [
+            79,
+            21
+          ],
+          [
+            17,
+            37
+          ]
+        ]
+      }
+    },
+    "knn": {
+      "name": "K-Nearest Neighbors (KNN)",
+      "pre_smote": {
+        "accuracy": 0.7532,
+        "precision": 0.66,
+        "recall": 0.6111,
+        "f1_score": 0.6346,
+        "roc_auc": 0.7886,
+        "confusion_matrix": [
+          [
+            83,
+            17
+          ],
+          [
+            21,
+            33
+          ]
+        ]
+      },
+      "post_smote": {
+        "accuracy": 0.7078,
+        "precision": 0.5652,
+        "recall": 0.7222,
+        "f1_score": 0.6341,
+        "roc_auc": 0.7591,
+        "confusion_matrix": [
+          [
+            70,
+            30
+          ],
+          [
+            15,
+            39
+          ]
+        ]
+      }
+    }
+  },
+  "dataset": {
+    "name": "UCI Pima Indians Diabetes Database",
+    "n_records": 768,
+    "n_features": 8,
+    "positive_rate": 0.349,
+    "train_size": 614,
+    "test_size": 154,
+    "resampled_train_size": 800
+  }
+}

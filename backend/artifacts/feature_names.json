@@ -1,0 +1,22 @@
+{
+  "features": [
+    "Pregnancies",
+    "Glucose",
+    "BloodPressure",
+    "SkinThickness",
+    "Insulin",
+    "BMI",
+    "DiabetesPedigreeFunction",
+    "Age"
+  ],
+  "display": {
+    "Pregnancies": "Pregnancies",
+    "Glucose": "Glucose (mg/dL)",
+    "BloodPressure": "Blood Pressure (mm Hg)",
+    "SkinThickness": "Skin Thickness (mm)",
+    "Insulin": "Insulin (mu U/mL)",
+    "BMI": "BMI",
+    "DiabetesPedigreeFunction": "Diabetes Pedigree Function",
+    "Age": "Age (years)"
+  }
+}

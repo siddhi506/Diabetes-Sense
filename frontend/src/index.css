@@ -1,0 +1,89 @@
+:root {
+  color-scheme: light;
+
+  /* ---- Color tokens ---- */
+  --paper: #F4F6F4;
+  --paper-raised: #FFFFFF;
+  --ink: #16262B;
+  --ink-soft: #4C5E61;
+  --line: #DDE3DF;
+  --line-strong: #C2CBC5;
+
+  --brand: #2E6F6B;
+  --brand-deep: #1F4F4C;
+  --brand-tint: #E4EFEC;
+
+  --risk-low: #3F8F5F;
+  --risk-low-tint: #E7F3EB;
+  --risk-moderate: #C98A2C;
+  --risk-moderate-tint: #FAF0DE;
+  --risk-high: #B23A2E;
+  --risk-high-tint: #F8E7E4;
+
+  --factor-up: #C1584A;
+  --factor-down: #3E7D77;
+
+  /* ---- Type ---- */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--ink);
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font-family: var(--font-body);
+}
+
+a {
+  color: var(--brand-deep);
+}
+
+::selection {
+  background: var(--brand-tint);
+  color: var(--brand-deep);
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

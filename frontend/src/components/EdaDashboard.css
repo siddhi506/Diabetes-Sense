@@ -1,0 +1,403 @@
+.eda-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  color: var(--text, #1e293b);
+}
+
+.eda-header {
+  margin-bottom: 0.25rem;
+}
+
+.eda-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--heading, #0f172a);
+}
+
+.eda-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted, #64748b);
+  margin: 0.25rem 0 0 0;
+}
+
+/* Insights Summary Grid */
+.eda-insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.eda-insight-card {
+  background: #ffffff;
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 10px;
+  padding: 1rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.insight-badge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--brand, #2e6f6b);
+  letter-spacing: 0.04em;
+}
+
+.eda-insight-card h4 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--heading, #0f172a);
+}
+
+.eda-insight-card p {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--text-muted, #64748b);
+}
+
+.eda-card {
+  background: var(--card-bg, #ffffff);
+  border: 1px solid var(--border, #e2e8f0);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.eda-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.eda-card-header h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--heading, #0f172a);
+}
+
+.eda-card-desc {
+  font-size: 0.8125rem;
+  color: var(--text-muted, #64748b);
+  margin: 0.25rem 0 0 0;
+}
+
+.eda-badge {
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+}
+
+/* SHAP List */
+.eda-shap-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.eda-shap-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.eda-shap-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 220px;
+  flex-shrink: 0;
+}
+
+.eda-shap-rank {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--brand, #2e6f6b);
+  width: 24px;
+}
+
+.eda-shap-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--heading, #1e293b);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.eda-shap-bar-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #f8fafc;
+  border-radius: 6px;
+  padding: 0.25rem;
+}
+
+.eda-shap-bar {
+  height: 22px;
+  background: linear-gradient(90deg, #3e7d77, #1f4f4c);
+  border-radius: 4px;
+  transition: width 0.4s ease;
+  min-width: 4px;
+}
+
+.eda-shap-val {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--heading, #0f172a);
+  font-family: var(--font-mono, monospace);
+}
+
+/* Heatmap */
+.eda-cell-inspector {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: #166534;
+  margin-bottom: 0.75rem;
+}
+
+.eda-heatmap-wrapper {
+  overflow-x: auto;
+  margin-top: 0.5rem;
+}
+
+.eda-heatmap {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+  text-align: center;
+}
+
+.eda-heatmap th {
+  padding: 0.5rem;
+  background: #f8fafc;
+  font-weight: 600;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+}
+
+.eda-heatmap-row-header {
+  font-weight: 600;
+  color: #1e293b;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.eda-heatmap-cell {
+  padding: 0.6rem;
+  font-weight: 700;
+  border: 1px solid #ffffff;
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.eda-heatmap-cell:hover {
+  transform: scale(1.1);
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+}
+
+/* Selector Group */
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.eda-selector-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.eda-select {
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.85rem;
+  background: #ffffff;
+  color: #0f172a;
+  cursor: pointer;
+}
+
+/* Distribution Chart */
+.eda-dist-chart {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.eda-legend {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.eda-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.eda-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.eda-dot--non {
+  background: #10b981;
+}
+
+.eda-dot--dia {
+  background: #f43f5e;
+}
+
+.eda-bars-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 180px;
+  padding-top: 1rem;
+  border-bottom: 2px solid #e2e8f0;
+  gap: 0.5rem;
+}
+
+.eda-bar-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.eda-bars-pair {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  width: 100%;
+}
+
+.eda-bar {
+  flex: 1;
+  border-radius: 3px 3px 0 0;
+  transition: height 0.3s ease;
+  min-height: 2px;
+}
+
+.eda-bar--non {
+  background: #10b981;
+}
+
+.eda-bar--dia {
+  background: #f43f5e;
+}
+
+.eda-bin-label {
+  font-size: 0.6875rem;
+  color: #64748b;
+  margin-top: 0.35rem;
+  text-align: center;
+}
+
+/* Stats Grid for Boxplots */
+.eda-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 640px) {
+  .eda-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.eda-stat-box {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #10b981;
+  border-radius: 8px;
+  padding: 1.15rem;
+}
+
+.eda-stat-box--dia {
+  border-left-color: #f43f5e;
+}
+
+.eda-stat-box h4 {
+  font-size: 0.875rem;
+  margin: 0 0 0.75rem 0;
+  color: #0f172a;
+}
+
+.eda-stat-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  color: #475569;
+}
+
+.eda-stat-rows div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.eda-outlier {
+  color: #e11d48;
+}
+
+.eda-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+  gap: 1rem;
+  color: #64748b;
+}
+
+.eda-spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid #e2e8f0;
+  border-top-color: var(--brand, #2e6f6b);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.eda-error {
+  padding: 1rem;
+  background: #fef2f2;
+  color: #991b1b;
+  border-radius: 8px;
+  border: 1px solid #fecaca;
+  font-size: 0.875rem;
+}
