@@ -52,20 +52,20 @@ export default function EdaDashboard() {
 
   // Helper for Correlation Heatmap Color
   const getCorrBg = (val) => {
-    if (val === 1) return '#f1f5f9'
+    if (val === 1) return 'var(--bg-subtle)'
     const absVal = Math.abs(val)
     if (val > 0) {
-      // Teal / blue for positive correlation
-      return `rgba(46, 111, 107, ${Math.min(absVal * 1.6, 0.9)})`
+      // Teal for positive correlation
+      return `rgba(13, 148, 136, ${Math.min(absVal * 1.5, 0.85)})`
     } else {
-      // Rose / red for negative correlation
-      return `rgba(225, 29, 72, ${Math.min(absVal * 1.6, 0.9)})`
+      // Rose for negative correlation
+      return `rgba(225, 29, 72, ${Math.min(absVal * 1.5, 0.85)})`
     }
   }
 
   const getCorrTextColor = (val) => {
-    if (val === 1) return '#475569'
-    return Math.abs(val) > 0.35 ? '#ffffff' : '#0f172a'
+    if (val === 1) return 'var(--ink-soft)'
+    return Math.abs(val) > 0.35 ? '#ffffff' : 'var(--ink)'
   }
 
   return (

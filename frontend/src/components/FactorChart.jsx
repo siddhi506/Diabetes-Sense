@@ -26,25 +26,25 @@ export default function FactorChart({ factors = [] }) {
         <BarChart data={data} layout="vertical" margin={{ top: 6, right: 24, left: 4, bottom: 6 }}>
           <XAxis
             type="number"
-            tick={{ fontSize: 11, fill: '#64748b' }}
-            axisLine={{ stroke: '#cbd5e1' }}
+            tick={{ fontSize: 11, fill: 'var(--ink-soft)' }}
+            axisLine={{ stroke: 'var(--line)' }}
             tickLine={false}
           />
           <YAxis
             type="category"
             dataKey="display_name"
             width={140}
-            tick={{ fontSize: 11.5, fill: '#1e293b' }}
-            axisLine={{ stroke: '#cbd5e1' }}
+            tick={{ fontSize: 11.5, fill: 'var(--ink)' }}
+            axisLine={{ stroke: 'var(--line)' }}
             tickLine={false}
           />
-          <ReferenceLine x={0} stroke="#94a3b8" strokeDasharray="3 3" />
-          <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(46, 111, 107, 0.08)' }} />
+          <ReferenceLine x={0} stroke="var(--line-strong)" strokeDasharray="3 3" />
+          <Tooltip content={<CustomTooltip />} cursor={{ fill: 'var(--brand-tint)' }} />
           <Bar dataKey="shap_value" radius={4} barSize={16}>
             {data.map((entry) => (
               <Cell
                 key={entry.feature}
-                fill={entry.shap_value > 0 ? 'var(--factor-up, #e11d48)' : 'var(--factor-down, #16a34a)'}
+                fill={entry.shap_value > 0 ? 'var(--factor-up)' : 'var(--factor-down)'}
               />
             ))}
           </Bar>
@@ -52,10 +52,10 @@ export default function FactorChart({ factors = [] }) {
       </ResponsiveContainer>
       <div className="factor-chart__legend">
         <span>
-          <i style={{ background: 'var(--factor-up, #e11d48)' }} /> Increases Predicted Risk (Positive SHAP)
+          <i style={{ background: 'var(--factor-up)' }} /> Increases Predicted Risk (Positive SHAP)
         </span>
         <span>
-          <i style={{ background: 'var(--factor-down, #16a34a)' }} /> Decreases Predicted Risk (Protective SHAP)
+          <i style={{ background: 'var(--factor-down)' }} /> Decreases Predicted Risk (Protective SHAP)
         </span>
       </div>
     </div>

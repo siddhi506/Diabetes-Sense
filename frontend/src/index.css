@@ -1,32 +1,95 @@
-:root {
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root,
+[data-theme="light"] {
   color-scheme: light;
 
-  /* ---- Color tokens ---- */
-  --paper: #F4F6F4;
-  --paper-raised: #FFFFFF;
-  --ink: #16262B;
-  --ink-soft: #4C5E61;
-  --line: #DDE3DF;
-  --line-strong: #C2CBC5;
+  /* ---- Light Theme Color tokens ---- */
+  --paper: #f8fafc;
+  --paper-raised: #ffffff;
+  --card-bg: #ffffff;
+  --bg-subtle: #f1f5f9;
+  
+  --ink: #0f172a;
+  --ink-soft: #475569;
+  --ink-muted: #94a3b8;
+  
+  --line: #e2e8f0;
+  --line-strong: #cbd5e1;
+  --line-hover: #94a3b8;
 
-  --brand: #2E6F6B;
-  --brand-deep: #1F4F4C;
-  --brand-tint: #E4EFEC;
+  /* Modern Teal & Emerald Medical Brand */
+  --brand: #0d9488;
+  --brand-deep: #0f766e;
+  --brand-light: #14b8a6;
+  --brand-tint: rgba(13, 148, 136, 0.08);
+  --brand-glow: rgba(13, 148, 136, 0.25);
+  --brand-gradient: linear-gradient(135deg, #0d9488 0%, #0284c7 100%);
 
-  --risk-low: #3F8F5F;
-  --risk-low-tint: #E7F3EB;
-  --risk-moderate: #C98A2C;
-  --risk-moderate-tint: #FAF0DE;
-  --risk-high: #B23A2E;
-  --risk-high-tint: #F8E7E4;
+  --risk-low: #16a34a;
+  --risk-low-tint: #f0fdf4;
+  --risk-low-border: #bbf7d0;
+  --risk-moderate: #d97706;
+  --risk-moderate-tint: #fffbeb;
+  --risk-moderate-border: #fde68a;
+  --risk-high: #e11d48;
+  --risk-high-tint: #fff1f2;
+  --risk-high-border: #fecdd3;
 
-  --factor-up: #C1584A;
-  --factor-down: #3E7D77;
+  --factor-up: #e11d48;
+  --factor-down: #0d9488;
+
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.03);
 
   /* ---- Type ---- */
-  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
-  --font-body: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+  --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* ---- Dark Theme Color tokens ---- */
+  --paper: #0b1120;
+  --paper-raised: #131d31;
+  --card-bg: #131d31;
+  --bg-subtle: #1a2744;
+  
+  --ink: #f8fafc;
+  --ink-soft: #94a3b8;
+  --ink-muted: #64748b;
+  
+  --line: #22324f;
+  --line-strong: #33476a;
+  --line-hover: #4a638f;
+
+  /* Luminous Teal & Cyan Brand for Dark Mode */
+  --brand: #14b8a6;
+  --brand-deep: #2dd4bf;
+  --brand-light: #5eead4;
+  --brand-tint: rgba(20, 184, 166, 0.15);
+  --brand-glow: rgba(20, 184, 166, 0.4);
+  --brand-gradient: linear-gradient(135deg, #14b8a6 0%, #38bdf8 100%);
+
+  --risk-low: #22c55e;
+  --risk-low-tint: rgba(34, 197, 94, 0.15);
+  --risk-low-border: rgba(34, 197, 94, 0.3);
+  --risk-moderate: #f59e0b;
+  --risk-moderate-tint: rgba(245, 158, 11, 0.15);
+  --risk-moderate-border: rgba(245, 158, 11, 0.3);
+  --risk-high: #fb7185;
+  --risk-high-tint: rgba(251, 113, 133, 0.15);
+  --risk-high-border: rgba(251, 113, 133, 0.3);
+
+  --factor-up: #fb7185;
+  --factor-down: #14b8a6;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.4);
 }
 
 * {
@@ -36,13 +99,14 @@
 html, body {
   margin: 0;
   padding: 0;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 15px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
@@ -51,12 +115,13 @@ body {
   min-height: 100vh;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 500;
-  line-height: 1.15;
+  font-weight: 700;
+  line-height: 1.2;
   margin: 0;
   color: var(--ink);
+  letter-spacing: -0.02em;
 }
 
 p {
@@ -68,12 +133,13 @@ button {
 }
 
 a {
-  color: var(--brand-deep);
+  color: var(--brand);
+  text-decoration: none;
 }
 
 ::selection {
   background: var(--brand-tint);
-  color: var(--brand-deep);
+  color: var(--brand);
 }
 
 :focus-visible {

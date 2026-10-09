@@ -1,7 +1,8 @@
 .factor-chart__legend {
   display: flex;
-  gap: 18px;
-  margin-top: 6px;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 8px;
   font-size: 0.78rem;
   color: var(--ink-soft);
 }
@@ -20,25 +21,28 @@
 }
 
 .factor-tooltip {
-  background: var(--ink);
-  color: #fff;
-  padding: 10px 12px;
-  border-radius: 6px;
+  background: var(--paper-raised);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  padding: 10px 14px;
+  border-radius: 8px;
   font-size: 0.78rem;
-  max-width: 200px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  max-width: 220px;
+  box-shadow: var(--shadow-md);
 }
 
 .factor-tooltip__title {
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 3px;
+  color: var(--ink);
 }
 
 .factor-tooltip__value {
-  opacity: 0.85;
+  color: var(--ink-soft);
   margin-bottom: 2px;
 }
 
 .factor-tooltip__impact {
-  opacity: 0.85;
+  color: var(--brand);
+  font-weight: 600;
 }

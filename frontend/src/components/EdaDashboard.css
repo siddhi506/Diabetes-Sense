@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  color: var(--text, #1e293b);
+  color: var(--ink);
 }
 
 .eda-header {
@@ -13,12 +13,12 @@
   font-size: 1.25rem;
   font-weight: 700;
   margin: 0;
-  color: var(--heading, #0f172a);
+  color: var(--ink);
 }
 
 .eda-subtitle {
   font-size: 0.85rem;
-  color: var(--text-muted, #64748b);
+  color: var(--ink-soft);
   margin: 0.25rem 0 0 0;
 }
 
@@ -30,21 +30,21 @@
 }
 
 .eda-insight-card {
-  background: #ffffff;
-  border: 1px solid var(--border, #e2e8f0);
-  border-radius: 10px;
-  padding: 1rem 1.15rem;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1.1rem 1.2rem;
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+  box-shadow: var(--shadow-sm);
 }
 
 .insight-badge {
   font-size: 0.6875rem;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
-  color: var(--brand, #2e6f6b);
+  color: var(--brand);
   letter-spacing: 0.04em;
 }
 
@@ -52,22 +52,22 @@
   margin: 0;
   font-size: 0.95rem;
   font-weight: 700;
-  color: var(--heading, #0f172a);
+  color: var(--ink);
 }
 
 .eda-insight-card p {
   margin: 0;
   font-size: 0.78rem;
   line-height: 1.45;
-  color: var(--text-muted, #64748b);
+  color: var(--ink-soft);
 }
 
 .eda-card {
-  background: var(--card-bg, #ffffff);
-  border: 1px solid var(--border, #e2e8f0);
-  border-radius: 12px;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: 14px;
   padding: 1.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-sm);
 }
 
 .eda-card-header {
@@ -81,22 +81,23 @@
 
 .eda-card-header h3 {
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 700;
   margin: 0;
-  color: var(--heading, #0f172a);
+  color: var(--ink);
 }
 
 .eda-card-desc {
   font-size: 0.8125rem;
-  color: var(--text-muted, #64748b);
+  color: var(--ink-soft);
   margin: 0.25rem 0 0 0;
 }
 
 .eda-badge {
-  background: #f1f5f9;
-  color: #475569;
+  background: var(--bg-subtle);
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
   font-size: 0.75rem;
-  font-weight: 600;
+  font-weight: 700;
   padding: 0.2rem 0.6rem;
   border-radius: 12px;
 }
@@ -125,15 +126,15 @@
 
 .eda-shap-rank {
   font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--brand, #2e6f6b);
+  font-weight: 800;
+  color: var(--brand);
   width: 24px;
 }
 
 .eda-shap-name {
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--heading, #1e293b);
+  color: var(--ink);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -144,14 +145,14 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  background: #f8fafc;
+  background: var(--bg-subtle);
   border-radius: 6px;
   padding: 0.25rem;
 }
 
 .eda-shap-bar {
   height: 22px;
-  background: linear-gradient(90deg, #3e7d77, #1f4f4c);
+  background: var(--brand-gradient);
   border-radius: 4px;
   transition: width 0.4s ease;
   min-width: 4px;
@@ -160,24 +161,26 @@
 .eda-shap-val {
   font-size: 0.8125rem;
   font-weight: 700;
-  color: var(--heading, #0f172a);
-  font-family: var(--font-mono, monospace);
+  color: var(--ink);
+  font-family: var(--font-mono);
 }
 
 /* Heatmap */
 .eda-cell-inspector {
-  background: #f0fdf4;
-  border: 1px solid #bbf7d0;
+  background: var(--brand-tint);
+  border: 1px solid var(--brand);
   padding: 0.5rem 0.75rem;
   border-radius: 6px;
   font-size: 0.8rem;
-  color: #166534;
+  color: var(--brand);
   margin-bottom: 0.75rem;
 }
 
 .eda-heatmap-wrapper {
   overflow-x: auto;
   margin-top: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--line);
 }
 
 .eda-heatmap {
@@ -189,25 +192,25 @@
 
 .eda-heatmap th {
   padding: 0.5rem;
-  background: #f8fafc;
-  font-weight: 600;
-  color: #475569;
-  border: 1px solid #e2e8f0;
+  background: var(--bg-subtle);
+  font-weight: 700;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
 }
 
 .eda-heatmap-row-header {
-  font-weight: 600;
-  color: #1e293b;
+  font-weight: 700;
+  color: var(--ink);
   text-align: left;
   padding: 0.5rem 0.75rem;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
 }
 
 .eda-heatmap-cell {
   padding: 0.6rem;
   font-weight: 700;
-  border: 1px solid #ffffff;
+  border: 1px solid var(--line);
   cursor: pointer;
   transition: transform 0.15s ease;
 }
@@ -215,7 +218,7 @@
 .eda-heatmap-cell:hover {
   transform: scale(1.1);
   z-index: 10;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--shadow-md);
 }
 
 /* Selector Group */
@@ -231,15 +234,16 @@
   gap: 0.5rem;
   font-size: 0.85rem;
   font-weight: 600;
+  color: var(--ink);
 }
 
 .eda-select {
   padding: 0.4rem 0.75rem;
   border-radius: 6px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--line);
   font-size: 0.85rem;
-  background: #ffffff;
-  color: #0f172a;
+  background: var(--bg-subtle);
+  color: var(--ink);
   cursor: pointer;
 }
 
@@ -256,6 +260,7 @@
   gap: 1.5rem;
   font-size: 0.8125rem;
   font-weight: 600;
+  color: var(--ink-soft);
 }
 
 .eda-legend-item {
@@ -271,11 +276,11 @@
 }
 
 .eda-dot--non {
-  background: #10b981;
+  background: var(--risk-low);
 }
 
 .eda-dot--dia {
-  background: #f43f5e;
+  background: var(--risk-high);
 }
 
 .eda-bars-container {
@@ -284,7 +289,7 @@
   justify-content: space-between;
   height: 180px;
   padding-top: 1rem;
-  border-bottom: 2px solid #e2e8f0;
+  border-bottom: 2px solid var(--line);
   gap: 0.5rem;
 }
 
@@ -312,16 +317,16 @@
 }
 
 .eda-bar--non {
-  background: #10b981;
+  background: var(--risk-low);
 }
 
 .eda-bar--dia {
-  background: #f43f5e;
+  background: var(--risk-high);
 }
 
 .eda-bin-label {
   font-size: 0.6875rem;
-  color: #64748b;
+  color: var(--ink-soft);
   margin-top: 0.35rem;
   text-align: center;
 }
@@ -341,21 +346,22 @@
 }
 
 .eda-stat-box {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-left: 4px solid #10b981;
-  border-radius: 8px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--risk-low);
+  border-radius: 10px;
   padding: 1.15rem;
 }
 
 .eda-stat-box--dia {
-  border-left-color: #f43f5e;
+  border-left-color: var(--risk-high);
 }
 
 .eda-stat-box h4 {
   font-size: 0.875rem;
+  font-weight: 700;
   margin: 0 0 0.75rem 0;
-  color: #0f172a;
+  color: var(--ink);
 }
 
 .eda-stat-rows {
@@ -363,7 +369,7 @@
   flex-direction: column;
   gap: 0.35rem;
   font-size: 0.8125rem;
-  color: #475569;
+  color: var(--ink-soft);
 }
 
 .eda-stat-rows div {
@@ -371,8 +377,13 @@
   justify-content: space-between;
 }
 
+.eda-stat-rows strong {
+  color: var(--ink);
+}
+
 .eda-outlier {
-  color: #e11d48;
+  color: var(--risk-high);
+  font-weight: 700;
 }
 
 .eda-loading {
@@ -381,23 +392,23 @@
   align-items: center;
   padding: 3rem;
   gap: 1rem;
-  color: #64748b;
+  color: var(--ink-soft);
 }
 
 .eda-spinner {
   width: 32px;
   height: 32px;
-  border: 3px solid #e2e8f0;
-  border-top-color: var(--brand, #2e6f6b);
+  border: 3px solid var(--line);
+  border-top-color: var(--brand);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
 
 .eda-error {
   padding: 1rem;
-  background: #fef2f2;
-  color: #991b1b;
+  background: var(--risk-high-tint);
+  color: var(--risk-high);
   border-radius: 8px;
-  border: 1px solid #fecaca;
+  border: 1px solid var(--risk-high-border);
   font-size: 0.875rem;
 }

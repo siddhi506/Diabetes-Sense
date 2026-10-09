@@ -1,4 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from 'react'
+import Logo from './components/Logo'
+import HomePage from './components/HomePage'
 import PatientForm from './components/PatientForm'
 import ResultPanel from './components/ResultPanel'
 import ModelComparison from './components/ModelComparison'
@@ -8,7 +10,7 @@ import { predictRisk, checkHealth, fetchModelsList } from './lib/api'
 import './App.css'
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('all') // 'all' | 'predictor' | 'models' | 'eda'
+  const [activeTab, setActiveTab] = useState('home') // 'home' | 'all' | 'predictor' | 'models' | 'eda'
   const [activeModel, setActiveModel] = useState('calibrated_random_forest')
   const [availableModels, setAvailableModels] = useState([])
   const [values, setValues] = useState(DEFAULT_VALUES)
@@ -16,6 +18,11 @@ export default function App() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const [autoUpdate, setAutoUpdate] = useState(true)
+
+  // Theme state: 'light' | 'dark'
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('diabetessense_theme') || 'light'
+  })
 
   // API Health status
   const [apiStatus, setApiStatus] = useState({ checked: false, online: false, latency: 0 })
@@ -25,6 +32,16 @@ export default function App() {
   const predictorRef = useRef(null)
   const modelsRef = useRef(null)
   const edaRef = useRef(null)
+
+  // Apply theme to document
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    localStorage.setItem('diabetessense_theme', theme)
+  }, [theme])
+
+  function toggleTheme() {
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'))
+  }
 
   const verifyApiHealth = useCallback(async () => {
     setCheckingApi(true)
@@ -70,7 +87,7 @@ export default function App() {
     }
     loadModels()
 
-    // Auto-run initial prediction immediately on page load
+    // Run initial prediction immediately so data is ready when navigating to predictor
     executePrediction(values, activeModel)
 
     // Run health check every 15 seconds
@@ -89,9 +106,7 @@ export default function App() {
 
   function handleTabClick(tabKey) {
     setActiveTab(tabKey)
-    if (tabKey === 'all') {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   function scrollToSection(ref) {
@@ -101,25 +116,16 @@ export default function App() {
   }
 
   return (
-    <div className="app">
-      {/* Header Bar */}
+    <div className="app" data-theme={theme}>
+      {/* Header & Sticky Menu Bar */}
       <header className="app__header">
         <div className="app__header-inner">
-          <div className="app__brand">
-            <span className="app__brand-mark" aria-hidden="true">
-              <svg width="30" height="30" viewBox="0 0 26 26" fill="none">
-                <path
-                  d="M13 2C13 2 5 11.5 5 16.5C5 21.1944 8.58172 24 13 24C17.4183 24 21 21.1944 21 16.5C21 11.5 13 2 13 2Z"
-                  fill="var(--brand, #2e6f6b)"
-                />
-                <circle cx="13" cy="16" r="3.5" fill="#ffffff" opacity="0.9" />
-              </svg>
-            </span>
+          <div className="app__brand" onClick={() => handleTabClick('home')} style={{ cursor: 'pointer' }}>
+            <Logo size={36} className="app__brand-logo" />
             <div>
               <div className="app__brand-title-row">
                 <h1>DiabetesSense</h1>
                 <span className="app__version-badge">v2.1 XAI</span>
-                <span className="app__live-badge">⚡ Real-Time Suite</span>
               </div>
               <p className="app__tagline">
                 Clinical Screening & Explainable Machine Learning Intelligence
@@ -144,21 +150,54 @@ export default function App() {
               <span className="api-dot" />
               <span className="api-status-text">
                 {checkingApi
-                  ? 'Pinging API…'
+                  ? 'Pinging…'
                   : apiStatus.online
                   ? `API: Live (${apiStatus.latency}ms)`
-                  : 'API: Offline (Demo Mode)'}
+                  : 'API: Offline'}
               </span>
               <span className="api-refresh-icon">↺</span>
             </button>
 
-            {/* Navigation Tabs */}
+            {/* Light / Dark Mode Toggle */}
+            <button
+              type="button"
+              className="theme-toggle-btn"
+              onClick={toggleTheme}
+              title={`Switch to ${theme === 'light' ? 'Dark' : 'Light'} Mode`}
+              aria-label="Toggle Light/Dark Theme"
+            >
+              {theme === 'light' ? (
+                <span className="theme-toggle-inner">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                  </svg>
+                  <span>Dark</span>
+                </span>
+              ) : (
+                <span className="theme-toggle-inner">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <circle cx="12" cy="12" r="5" />
+                    <line x1="12" y1="1" x2="12" y2="3" />
+                    <line x1="12" y1="21" x2="12" y2="23" />
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                    <line x1="1" y1="12" x2="3" y2="12" />
+                    <line x1="21" y1="12" x2="23" y2="12" />
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                  </svg>
+                  <span>Light</span>
+                </span>
+              )}
+            </button>
+
+            {/* Navigation Menu Bar */}
             <nav className="app__nav">
               <button
-                className={`app__nav-btn ${activeTab === 'all' ? 'app__nav-btn--active' : ''}`}
-                onClick={() => handleTabClick('all')}
+                className={`app__nav-btn ${activeTab === 'home' ? 'app__nav-btn--active' : ''}`}
+                onClick={() => handleTabClick('home')}
               >
-                🌟 All-in-One Dashboard
+                🏠 Home
               </button>
               <button
                 className={`app__nav-btn ${activeTab === 'predictor' ? 'app__nav-btn--active' : ''}`}
@@ -170,41 +209,52 @@ export default function App() {
                 className={`app__nav-btn ${activeTab === 'models' ? 'app__nav-btn--active' : ''}`}
                 onClick={() => handleTabClick('models')}
               >
-                📊 Model Benchmarks
+                📊 Models
               </button>
               <button
                 className={`app__nav-btn ${activeTab === 'eda' ? 'app__nav-btn--active' : ''}`}
                 onClick={() => handleTabClick('eda')}
               >
-                📈 Data Analytics & EDA
+                📈 Analytics & EDA
+              </button>
+              <button
+                className={`app__nav-btn ${activeTab === 'all' ? 'app__nav-btn--active' : ''}`}
+                onClick={() => handleTabClick('all')}
+              >
+                🌟 All-in-One View
               </button>
             </nav>
           </div>
         </div>
       </header>
 
-      {/* Top Disclaimer & Jump Bar */}
-      <div className="app__disclaimer">
-        <span>
-          ⚠️ <strong>Educational / Research Tool:</strong> Not a certified medical device. Real-time predictions based on UCI Pima calibrated models & SHAP interpretability.
-        </span>
-        {activeTab === 'all' && (
-          <div className="app__jump-links">
-            <span className="jump-title">Jump to:</span>
-            <button type="button" onClick={() => scrollToSection(predictorRef)} className="jump-btn">
-              ↓ 1. Risk Assessment
-            </button>
-            <button type="button" onClick={() => scrollToSection(modelsRef)} className="jump-btn">
-              ↓ 2. Model Suite
-            </button>
-            <button type="button" onClick={() => scrollToSection(edaRef)} className="jump-btn">
-              ↓ 3. Data Analytics & EDA
-            </button>
-          </div>
-        )}
-      </div>
+      {/* Top Disclaimer */}
+      {activeTab !== 'home' && (
+        <div className="app__disclaimer">
+          <span>
+            ⚠️ <strong>Notice:</strong> Educational & research prototype. Predictions based on UCI Pima calibrated models & SHAP interpretability.
+          </span>
+          {activeTab === 'all' && (
+            <div className="app__jump-links">
+              <span className="jump-title">Jump to:</span>
+              <button type="button" onClick={() => scrollToSection(predictorRef)} className="jump-btn">
+                ↓ 1. Risk Assessment
+              </button>
+              <button type="button" onClick={() => scrollToSection(modelsRef)} className="jump-btn">
+                ↓ 2. Model Suite
+              </button>
+              <button type="button" onClick={() => scrollToSection(edaRef)} className="jump-btn">
+                ↓ 3. Data Analytics & EDA
+              </button>
+            </div>
+          )}
+        </div>
+      )}
 
-      {/* 1. ALL-IN-ONE VIEW: Everything working at once on one unified page */}
+      {/* 1. HOME PAGE VIEW */}
+      {activeTab === 'home' && <HomePage onNavigate={setActiveTab} />}
+
+      {/* 2. ALL-IN-ONE VIEW */}
       {activeTab === 'all' && (
         <main className="app__main-dashboard">
           {/* SECTION 1: Patient Predictor & Risk Assessment */}
@@ -287,7 +337,7 @@ export default function App() {
         </main>
       )}
 
-      {/* 2. TABBED VIEWS: Individual focused view modes */}
+      {/* 3. FOCUSED RISK PREDICTOR TAB */}
       {activeTab === 'predictor' && (
         <main className="app__main">
           <section className="app__panel app__panel--form">
@@ -332,6 +382,7 @@ export default function App() {
         </main>
       )}
 
+      {/* 4. FOCUSED MODEL BENCHMARKS TAB */}
       {activeTab === 'models' && (
         <main className="app__main app__main--full">
           <section className="app__panel">
@@ -347,6 +398,7 @@ export default function App() {
         </main>
       )}
 
+      {/* 5. FOCUSED EDA TAB */}
       {activeTab === 'eda' && (
         <main className="app__main app__main--full">
           <section className="app__panel">
@@ -358,11 +410,15 @@ export default function App() {
       {/* Footer */}
       <footer className="app__footer">
         <div className="footer-content">
+          <div className="footer-brand-row">
+            <Logo size={22} />
+            <span className="footer-title">DiabetesSense Clinical Intelligence</span>
+          </div>
           <span>
-            <strong>DiabetesSense XAI Prototype</strong> • Powered by FastAPI, scikit-learn, XGBoost, SHAP & React
+            Powered by FastAPI, scikit-learn, XGBoost, SHAP & React • UCI Pima Indians Diabetes Database
           </span>
-          <span>
-            Dataset: UCI Pima Indians Diabetes Database • 5-Fold Stratified Cross-Validation with SMOTE Resampling
+          <span className="footer-sub">
+            Educational & Research Screening MVP — Not a Medical Device
           </span>
         </div>
       </footer>
